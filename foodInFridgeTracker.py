@@ -9,7 +9,8 @@ class food:
         self.useByDate=useBy
         self.usagesLeft=usagesLeft
 
-def generateID(array):
+
+def generateID(array): #Generates a new ID based on the ID of the last item in the list
     id="-1"
     index=len(foodList)
     try:
@@ -73,18 +74,8 @@ def addItemChat(): #Activates when the user decides to add a new food item.
     
     food1=food(id,type,False,useByDate,usages)
     print(food1.ID,food1.type,food1.useByDate,food1.open,food1.usagesLeft)
-        
-def chatBotStart(): #'Main Menu' of the chat bot. Decide what action to take.
-    print("What action would you like to take?")
-    print("[1] Add a food item")
-    #Other options here.
-    
-    option=input()
-    if(option=="1"):
-        addItemChat()
-    else:
-        print("Sorry, command not found.")
-    
+
+def endChat(): #After an action is performed, will see if the user has finished with the foodTracker or not.
     print("Would you like to perform another action?")
     print("[1] Yes")
     print("[2] No")
@@ -95,6 +86,27 @@ def chatBotStart(): #'Main Menu' of the chat bot. Decide what action to take.
         print("Thank you for using foodTracker.")
     else:
         print("Command not found. Ending chat.")
+
+def chatBotStart(): #'Main Menu' of the chat bot. Decide what action to take.
+    print("---------------------------------------")
+    print("What action would you like to take?")
+    print("[1] Add a food item")
+    print("[2] Decrease the usages on a food item")
+    print("[3] Generate food shopping information")
+    print("[4] Exit")
+    print("---------------------------------------")
+    
+    option=input()
+    if(option=="1"):
+        addItemChat()
+        endChat()
+    elif(option=="4"):
+        print("Thank you for using foodTracker.") #Ends chat. endChat() is not called here because then it would double check if they want to exit.
+    else:
+        print("Sorry, command not found.")
+        endChat()
+    
+    
 
 #Start
 chatBotStart()
